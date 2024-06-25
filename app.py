@@ -6,6 +6,9 @@ sock.bind(('', 9090))
 sock.listen(1)
 while True:
     conn, addr = sock.accept()
-    conn.send('Hello from Server!'.encode())
+    data = conn.recv(1024)
+    if not data:
+        break
+    conn.send(data.upper())
     conn.close()
 #Test comment
